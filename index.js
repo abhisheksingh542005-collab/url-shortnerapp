@@ -1,6 +1,6 @@
 import express from "express";
 import cors from"cors";
-import connectTomongo from"./config/db.js";
+import connectToMongo from"./Config/db.js";
 import authRoutes from"./routes/authRoutes.js";
 import  urlRoutes from"./routes/urlRoutes.js";
 import {urllimiter} from"./middlewares/rateLimiter.js";
@@ -10,7 +10,7 @@ import {urllimiter} from"./middlewares/rateLimiter.js";
 
 
 const app=express();
-connectTomongo();
+connectToMongo();
 
 app.use(cors());
 app.use(express.json());
