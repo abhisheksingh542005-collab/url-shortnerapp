@@ -1,8 +1,10 @@
 import Url from "../models/url.js";
 import { nanoid } from "nanoid";
 import connectToMongo from "../db.js";
+
 export const handleGenerateShortUrl = async (req, res) => {
     try {
+        await connectToMongo();
         const { originalUrl } = req.body;
 
         if (!originalUrl) {
