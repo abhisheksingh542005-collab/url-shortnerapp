@@ -19,7 +19,7 @@ export const handleGenerateShortUrl = async (req, res) => {
 
         return res.status(201).json({
             id: shortid,
-            shortUrl: `http://localhost:7000/api/v1/url/${shortid}`,
+            shortUrl: `${process.env.BASE_URL || "https://url-shortnerapp.vercel.app"}/api/v1/url/${shortid}`,
             data: newUrl
         });
 
