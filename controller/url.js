@@ -1,6 +1,6 @@
 import Url from "../models/url.js";
 import { nanoid } from "nanoid";
-import connectToMongo from "../db.js";
+import connectToMongo from "../Config/db.js";
 
 export const handleGenerateShortUrl = async (req, res) => {
     try {
