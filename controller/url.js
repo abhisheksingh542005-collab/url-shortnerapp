@@ -21,7 +21,7 @@ export const handleGenerateShortUrl = async (req, res) => {
 
         return res.status(201).json({
             id: shortid,
-            shortUrl: `${process.env.BASE_URL || "https://url-shortnerapp.vercel.app"}/api/v1/url/${shortid}`,
+            shortUrl: `${process.env.BASE_URL || 'https://url-shortnerapp.vercel.app'}/api/v1/url/${shortid}`
             data: newUrl
         });
 
@@ -33,22 +33,18 @@ export const handleGenerateShortUrl = async (req, res) => {
 
 // 2. Redirect to Original URL (GET)
 export const handleRedirectUrl = async (req, res) => {
-    try {
-        const shortid = req.params.shortid; // Route se shortid nikali
-        
-        // Database mein dhoondo ki yeh shortid kiske pas hai
-        const entry = await Url.findOne({ shortid });
-
-        if (!entry) {
-            return res.status(404).json({ error: "URL nahi mila bhai!" });
-        }
-
-        // Asli URL par redirect kar do
-        return res.redirect(entry.originalUrl);
-    } catch (error) {
-        console.error("Redirect Error:", error);
-        return res.status(500).json({ error: "Internal Server Error" });
+  try {
+    const { shortId } = req.params;
+    const entry = await Url.findOne({ shortId });
+    
+    if (!entry) {
+      return res.status(404).json({ error: "URL not found" });
     }
+    
+    return res.redirect(entry.originalUrl); // Asli website par bhej dega
+  } catch (error) {
+    return res.status(500).json({ error: "Server error" });
+  }
 };
 
 
