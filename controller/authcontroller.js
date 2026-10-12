@@ -1,9 +1,10 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import connectToMongo from "../Config/db.js";
 export const registerUser = async (req, res) => {
     try {
+        await connectToMongo();
         const { email, password } = req.body;
 
         const existingUser = await User.findOne({ email });
